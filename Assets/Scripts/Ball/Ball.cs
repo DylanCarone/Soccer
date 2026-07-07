@@ -8,7 +8,10 @@ public class Ball : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] private Collider2D playerDetectionArea;
     [SerializeField] private GameObject trail;
+    [SerializeField] private BallSettings settings;
 
+    public BallSettings Settings => settings;
+    
     private float height;
     private float heightVelocity;
     public float HeightVelocity => heightVelocity;
@@ -76,6 +79,8 @@ public class Ball : MonoBehaviour
         {
             height = 0f;
         }
+        
+        height = height < 0f ? 0f : height;
         
         spriteRenderer.transform.localPosition = new Vector3(0f, height, 0f);
 

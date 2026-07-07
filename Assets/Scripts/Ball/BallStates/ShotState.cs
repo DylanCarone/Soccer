@@ -3,18 +3,11 @@ using UnityEngine;
 
 public class ShotState : BallState
 {
-    private const string ROLLING_ANIMATION = "roll";
-    private const float SHOT_DURATION = 1f;
-
-    private const float SHOT_SPRITE_SCALE = 0.7f;
-    private const float SHOT_HEIGHT = 1f;
-
     private float initialSpeed;
     private float timeElapsed;
     
     private Transform ballSpriteTransform;
     private Vector3 ballOriginalScale;
-    private Vector3 ballOriginalPosition;
     
     
     
@@ -22,13 +15,12 @@ public class ShotState : BallState
     {
         ballSpriteTransform = ball.SpriteRenderer.transform;
         ballOriginalScale = ballSpriteTransform.localScale;
-        ballOriginalPosition = ballSpriteTransform.localPosition;
     }
 
     public override void Enter()
     {
         
-        ball.PlayAnimation(ROLLING_ANIMATION);
+        ball.PlayAnimation(Animations.ROLLING_ANIMATION);
         ball.SpriteRenderer.flipX = ball.Rigidbody.linearVelocity.x < 0;
         
         initialSpeed = ball.Rigidbody.linearVelocity.magnitude;
@@ -49,7 +41,7 @@ public class ShotState : BallState
         timeElapsed += Time.deltaTime;
 
         ProcessGravity();
-        if (timeElapsed >=  SHOT_DURATION)
+        if (timeElapsed >=  ball.Settings.shotDuration)
         {
             //ball.Rigidbody.linearVelocity = Vector2.zero;
             machine.ChangeState(new FreeformState(ball, machine, playerDetectionArea, null));
@@ -68,7 +60,7 @@ public class ShotState : BallState
             float speedRatio = Mathf.Clamp01(currentSpeed / initialSpeed);
             float easedRatio = Mathf.SmoothStep(0f, 1f, speedRatio);
             
-            float targetYScale = Mathf.Lerp(ballOriginalScale.y, SHOT_SPRITE_SCALE, easedRatio);
+            float targetYScale = Mathf.Lerp(ballOriginalScale.y, ball.Settings.shotSpriteScale, easedRatio);
             
             
             ballSpriteTransform.localScale = new Vector3(ballSpriteTransform.localScale.x, targetYScale, ballSpriteTransform.localScale.z);

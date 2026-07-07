@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class RecoveringState : PlayerState
 {
-    private const string RECOVER_ANIMATION = "recover";
 
     private float recoverTimer;
     
@@ -14,7 +13,7 @@ public class RecoveringState : PlayerState
     public override void Enter()
     {
         player.Stop();
-        player.PlayAnimation(RECOVER_ANIMATION);
+        player.PlayAnimation(Animations.RECOVER_ANIMATION);
         recoverTimer = Time.time;
         
     }

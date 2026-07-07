@@ -24,6 +24,11 @@ public class PlayerInputProvider : MonoBehaviour, IInputProvider
         playerInput = GetComponent<PlayerInput>();
         controls = new PlayerControls();
 
+        ForceControllerDebug();
+    }
+
+    private void ForceControllerDebug()
+    {
         if (forceKeyboard)
         {
             if (Keyboard.current != null)

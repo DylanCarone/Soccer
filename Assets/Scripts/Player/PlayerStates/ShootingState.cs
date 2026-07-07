@@ -1,7 +1,7 @@
 using UnityEngine;
 public class ShootingState : PlayerState
 {
-    private const string KICK_ANIMATION = "kick";
+    
 
     private float shotPower;
     Vector2 shotDirection;
@@ -13,7 +13,7 @@ public class ShootingState : PlayerState
 
     public override void Enter()
     {
-        player.PlayAnimation(KICK_ANIMATION);
+        player.PlayAnimation(Animations.KICK_ANIMATION);
     }
 
     public override void Tick()

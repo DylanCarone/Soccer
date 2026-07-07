@@ -8,6 +8,7 @@ public abstract class BallState
     protected readonly BallStateMachine machine;
     protected readonly Collider2D playerDetectionArea;
     protected readonly Transform carrier;
+    protected readonly BallSettings settings;
     
     public BallState(Ball ball, BallStateMachine machine, Collider2D playerDetectionArea, Transform contextCarrier)
     {
@@ -15,6 +16,7 @@ public abstract class BallState
         this.machine = machine;
         this.playerDetectionArea = playerDetectionArea;
         this.carrier = contextCarrier;
+        this.settings = ball.Settings;
         
     }
 

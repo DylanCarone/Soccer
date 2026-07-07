@@ -4,16 +4,7 @@ using UnityEngine;
 
 public class CarriedState : BallState
 {
-    private const string ROLLING_ANIMATION = "roll";
-    private const string IDLE_ANIMATION = "idle";
-    
-    private const float DRIBBLE_FREQUENCY = 8f;
-    private const float DRIBBLE_INTENSITY = 0.15f;
-    
-    private Vector3 offset;
-
-
-    
+  
     private Player carrierPlayer;
     private float dribbleTime;
 
@@ -21,7 +12,6 @@ public class CarriedState : BallState
     
     public CarriedState(Ball ball, BallStateMachine machine, Collider2D playerDetectionArea, Transform contextCarrier) : base(ball, machine, playerDetectionArea, contextCarrier)
     {
-        offset = new Vector3(.75f, 0f, 0f);
     }
 
 
@@ -30,7 +20,7 @@ public class CarriedState : BallState
         ball.Rigidbody.bodyType = RigidbodyType2D.Kinematic;
         ball.transform.SetParent(carrier);
         ball.transform.localPosition = Vector3.zero;
-        ball.PlayAnimation(IDLE_ANIMATION);
+        ball.PlayAnimation(Animations.IDLE_ANIMATION);
         carrier.TryGetComponent(out carrierPlayer);
     }
 
@@ -49,7 +39,7 @@ public class CarriedState : BallState
     {
         if (carrierPlayer.Rigidbody.linearVelocity.magnitude != 0)
         {
-            ball.PlayAnimation(ROLLING_ANIMATION);
+            ball.PlayAnimation(Animations.ROLLING_ANIMATION);
             DribbleBall();
         }
         else
@@ -62,14 +52,15 @@ public class CarriedState : BallState
     {
         if (carrierPlayer.Rigidbody.linearVelocity.x != 0)
         {
-            vx = Mathf.Cos(dribbleTime * DRIBBLE_FREQUENCY) *  DRIBBLE_INTENSITY;
+            vx = Mathf.Cos(dribbleTime * ball.Settings.dribbleFrequency) *  ball.Settings.dribbleIntensity;
         }
     }
 
     private void BallOffsetAndFlip(bool leftSide)
     {
-        ball.transform.position = leftSide ? carrier.position + new Vector3(vx + -offset.x,offset.y,offset.z) :
-            carrier.position + new Vector3(vx + offset.x,offset.y,offset.z);
+        var offset = ball.Settings.dribbleOffset;
+        ball.transform.position = leftSide ? carrier.position + new Vector3(vx + -offset.x,offset.y,0) :
+            carrier.position + new Vector3(vx + offset.x,offset.y,0);
         ball.SpriteRenderer.flipX = leftSide;
     }
 

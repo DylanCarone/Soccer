@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PreppingShot : PlayerState
 {
-    private const string PREP_ANIMATION = "prep_kick";
     
     const float DURATION_MAX_BONUS = 1f;
     private const float EASE_REWARD_FACTOR = 0.2f;
@@ -16,7 +15,7 @@ public class PreppingShot : PlayerState
 
     public override void Enter()
     {
-        player.PlayAnimation(PREP_ANIMATION);
+        player.PlayAnimation(Animations.PREP_ANIMATION);
         player.Rigidbody.linearVelocity = Vector2.zero;
         
         timeStartShot = Time.time;
@@ -29,8 +28,7 @@ public class PreppingShot : PlayerState
         player.FlipPlayer(currentInput);
         if (currentInput != Vector2.zero)
         {
-            shotDirection = currentInput.normalized;
-        }
+            shotDirection = currentInput.normalized; }
         
         
         var durationPress = Time.time - timeStartShot;
@@ -41,13 +39,10 @@ public class PreppingShot : PlayerState
         }
         else
         {
-            // charge ball
             float bonus = CalculateBonus(durationPress);
             float shotPower = player.Power * (1 + bonus);
-            
             Vector2 finalDirection = shotDirection;
             
-            // do i have to do a shot here? where does the bonus, shot power and final direction of this if go?
         }
     }
 
@@ -60,6 +55,7 @@ public class PreppingShot : PlayerState
 
         if (Vector2.Dot(finalDirection, lookDirection) < 0)
         {
+            // use this to prevent the player from shooting behind -- just disable the look direction line
             //finalDirection = new Vector2(0, Mathf.Sign(finalDirection.y));
         }
         

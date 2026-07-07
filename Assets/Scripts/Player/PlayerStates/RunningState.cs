@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class RunningState : PlayerState
 {
-    private const string RUN_ANIMATION = "run";
-    private const string IDLE_ANIMATION = "idle";
-    
     public RunningState(Player player, PlayerStateMachine machine) : base(player, machine)
     {}
 
@@ -35,12 +32,12 @@ public class RunningState : PlayerState
         if (direction.sqrMagnitude > 0)
         {
             player.Move(direction);
-            player.PlayAnimation(RUN_ANIMATION);
+            player.PlayAnimation(Animations.RUN_ANIMATION);
         }
         else
         {
             player.Stop();
-            player.PlayAnimation(IDLE_ANIMATION);
+            player.PlayAnimation(Animations.IDLE_ANIMATION);
         }
     }
 

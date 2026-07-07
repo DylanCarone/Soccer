@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float kickPower = 1f;
 
 
-    private bool hasBall = false;
+    private bool hasBall;
     private IInputProvider inputProvider;
     private PlayerStateMachine machine;
     private Rigidbody2D rb;
@@ -47,7 +47,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         machine.Tick();
-        
     }
 
     public void Move(Vector2 direction)
