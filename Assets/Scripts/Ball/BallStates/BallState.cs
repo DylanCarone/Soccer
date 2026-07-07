@@ -2,7 +2,6 @@ using UnityEngine;
 
 public abstract class BallState
 {
-    private const float GRAVITY = 10;
     
     protected readonly Ball ball;
     protected readonly BallStateMachine machine;
@@ -35,7 +34,7 @@ public abstract class BallState
     {
         if (ball.IsInAir || ball.HeightVelocity > 0)
         {
-            ball.ApplyHeightGravity(GRAVITY * Time.deltaTime);
+            ball.ApplyHeightGravity(ball.Settings.gravity * Time.deltaTime);
             
             if (!ball.IsInAir && ball.HeightVelocity < 0)
             {

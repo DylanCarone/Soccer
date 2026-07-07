@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844a54de11a50964386cbc7c764c56f9, type: 3}
   m_Name: BallSettings
   m_EditorClassIdentifier: Assembly-CSharp::BallSettings
-  gravity: 10
+  gravity: 5
   dribbleFrequency: 8
   dribbleIntensity: 0.15
   dribbleOffset: {x: 0.75, y: 0}
@@ -22,4 +22,4 @@ MonoBehaviour:
   bounciness: 0.8
   shotDuration: 1
   shotSpriteScale: 0.75
-  shotHeight: 1
+  shotHeight: 3

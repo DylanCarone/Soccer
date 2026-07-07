@@ -6,4 +6,8 @@ public interface IInputProvider
     bool GetActionPressedThisFrame();
     bool GetActionHeld();
     bool GetActionReleasedThisFrame();
+
+    bool GetPassPressedThisFrame();
+    bool GetPassHeld();
+    bool GetPassReleasedThisFrame();
 }

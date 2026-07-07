@@ -22,16 +22,16 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -5372058389009050295, guid: 81ca68cecb3c4f24da1636eb85cc5afc, type: 3}
-    - time: 0.041666668
+    - time: 0.05
       value: {fileID: 3683260516794458629, guid: 81ca68cecb3c4f24da1636eb85cc5afc, type: 3}
-    - time: 0.083333336
+    - time: 0.1
       value: {fileID: -8080747543109114993, guid: 81ca68cecb3c4f24da1636eb85cc5afc, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 24
+  m_SampleRate: 20
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -56,7 +56,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.125
+    m_StopTime: 0.15
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -76,7 +76,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.125
+  - time: 0.15
     functionName: OnAnimationFinishedTrigger
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -61,12 +61,23 @@ public class Ball : MonoBehaviour
     {
         animator.speed = 0;    
     }
+    public void Pass(Vector2 direction, float power, float distance)
+    {
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.linearVelocity = direction * power;
+        if (distance > 10f)
+        {
+            LaunchIntoAir(settings.shotHeight);
+            
+        }
+        machine.ChangeState(new FreeformState(this, machine,playerDetectionArea, playerTransform));
+    }
 
     public void Shoot(Vector2 shotVelocity, float power)
     {
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.linearVelocity = shotVelocity * power;
-        LaunchIntoAir(power * 0.6f);
+        LaunchIntoAir(settings.shotHeight);
         machine.ChangeState(new ShotState(this, machine,playerDetectionArea, playerTransform));
     }
 
@@ -104,5 +115,7 @@ public class Ball : MonoBehaviour
         heightVelocity = verticalForce;
         height = 0.05f;
     }
+
+
     
 }

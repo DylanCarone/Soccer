@@ -18,6 +18,10 @@ public class PlayerInputProvider : MonoBehaviour, IInputProvider
     bool actionHeld;
     bool actionReleasedThisFrame;
     bool actionPressedThisFrame;
+    
+    bool passHeld;
+    bool passReleasedThisFrame;
+    bool passPressedThisFrame;
 
     private void Awake()
     {
@@ -64,6 +68,8 @@ public class PlayerInputProvider : MonoBehaviour, IInputProvider
         controls.Player.Move.canceled += HandleMove;
         controls.Player.Action.performed += HandleActionPressed;
         controls.Player.Action.canceled += HandleActionReleased;
+        controls.Player.Pass.performed += HandlePassPressed;
+        controls.Player.Pass.canceled += HandlePassReleased;
     }
 
     private void OnDisable()
@@ -72,6 +78,9 @@ public class PlayerInputProvider : MonoBehaviour, IInputProvider
         controls.Player.Move.canceled -= HandleMove;
         controls.Player.Action.performed -= HandleActionPressed;
         controls.Player.Action.canceled -= HandleActionReleased;
+        controls.Player.Pass.performed -= HandlePassPressed;
+        controls.Player.Pass.canceled -= HandlePassReleased;
+        
         controls.Player.Disable();
     }
 
@@ -79,6 +88,8 @@ public class PlayerInputProvider : MonoBehaviour, IInputProvider
     {
         actionReleasedThisFrame = false;
         actionPressedThisFrame = false;
+        passPressedThisFrame = false;
+        passReleasedThisFrame = false;
     }
 
     void HandleMove(InputAction.CallbackContext ctx) => moveInput = ctx.ReadValue<Vector2>();
@@ -92,6 +103,18 @@ public class PlayerInputProvider : MonoBehaviour, IInputProvider
     {
         actionHeld = false;
         actionReleasedThisFrame = true;
+    }
+    
+    void HandlePassPressed(InputAction.CallbackContext ctx)
+    {
+        passHeld = true;
+        passPressedThisFrame = true;
+    }
+
+    void HandlePassReleased(InputAction.CallbackContext ctx)
+    {
+        passHeld = false;
+        passReleasedThisFrame = true;
     }
 
     public Vector2 GetMoveInput() => moveInput;
@@ -109,5 +132,20 @@ public class PlayerInputProvider : MonoBehaviour, IInputProvider
     public bool GetActionReleasedThisFrame()
     {
         return actionReleasedThisFrame;
+    }
+
+    public bool GetPassPressedThisFrame()
+    {
+        return passPressedThisFrame;
+    }
+
+    public bool GetPassHeld()
+    {
+        return passHeld;
+    }
+
+    public bool GetPassReleasedThisFrame()
+    {
+        return passReleasedThisFrame;
     }
 }

@@ -23,6 +23,11 @@ public class RunningState : PlayerState
         {
             machine.ChangeState(new PreppingShot(player, machine));
         }
+        if (player.InputProvider.GetPassPressedThisFrame() && player.HasBall)
+        {
+            Debug.Log("Pass");
+            machine.ChangeState(new PassingState(player, machine));
+        }
     }
 
     private void MovePlayer()

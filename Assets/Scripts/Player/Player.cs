@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float tackleDuration = 0.5f;
     [SerializeField] private float recoverDuration = 0.2f;
     [SerializeField] private float kickPower = 1f;
+    [SerializeField] private float passPower = 1f;
+    [SerializeField] private float maxPassSearchRadius = 10f;
+    [SerializeField] private float maxPassLineDeviation = 1.5f;
 
 
     private bool hasBall;
@@ -26,6 +29,7 @@ public class Player : MonoBehaviour
     public float RecoverDuration => recoverDuration;
     public Rigidbody2D Rigidbody => rb;
     public float Power => kickPower;
+    public float PassPower => passPower;
     
     public bool Flipped => spriteRenderer.flipX;
     public bool HasBall => hasBall;
