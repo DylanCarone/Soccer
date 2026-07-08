@@ -22,6 +22,8 @@ public class CarriedState : BallState
         ball.transform.localPosition = Vector3.zero;
         ball.PlayAnimation(Animations.IDLE_ANIMATION);
         carrier.TryGetComponent(out carrierPlayer);
+        
+        ball.HandlePossessionChange(carrierPlayer);
     }
 
     public override void Tick()

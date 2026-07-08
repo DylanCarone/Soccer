@@ -21,4 +21,6 @@ public class BallSettings : ScriptableObject
     public float shotDuration = 1f;
     public float shotSpriteScale = 0.7f;
     public float shotHeight = 1f;
+
+    [Header("Passing Settings")] public float passHeight = 5f;
 }

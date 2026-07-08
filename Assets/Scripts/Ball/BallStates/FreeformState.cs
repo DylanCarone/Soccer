@@ -12,7 +12,8 @@ public class FreeformState : BallState
     {
         filter = new ContactFilter2D();
         filter.SetLayerMask(LayerMask.GetMask("Player"));
-        filter.useTriggers = true;
+        filter.useLayerMask = true;
+        filter.useTriggers = false;
     }
 
     public override void Enter()
@@ -69,5 +70,10 @@ public class FreeformState : BallState
         carrierTransform.TryGetComponent(out Player carrierPlayer);
         carrierPlayer.SetBall(true);
         machine.ChangeState(new CarriedState(ball, machine, playerDetectionArea, carrierTransform));
+    }
+
+    public override bool CanAirInteract()
+    {
+        return true;
     }
 }

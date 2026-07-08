@@ -1,10 +1,10 @@
 using UnityEngine;
 public class ShootingState : PlayerState
 {
-    
-
     private float shotPower;
     Vector2 shotDirection;
+    
+    
     public ShootingState(Player player, PlayerStateMachine machine, float power, Vector2 shotDirection) : base(player, machine)
     {
         shotPower = power;

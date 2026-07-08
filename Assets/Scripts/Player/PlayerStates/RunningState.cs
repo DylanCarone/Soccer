@@ -1,8 +1,11 @@
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RunningState : PlayerState
 {
+
+    
     public RunningState(Player player, PlayerStateMachine machine) : base(player, machine)
     {}
 
@@ -13,21 +16,37 @@ public class RunningState : PlayerState
     public override void Tick()
     {
         MovePlayer();
-        
 
-        if (player.InputProvider.GetActionPressedThisFrame() && player.Rigidbody.linearVelocity.sqrMagnitude > 0 && !player.HasBall)
+        if (player.HasBall)
         {
-            machine.ChangeState(new TacklingState(player, machine));
+            if (player.InputProvider.GetActionPressedThisFrame())
+            {
+                machine.ChangeState(new PreppingShot(player, machine));
+            }
+            if (player.InputProvider.GetPassPressedThisFrame())
+            {
+                machine.ChangeState(new PassingState(player, machine));
+            }
         }
-        if (player.InputProvider.GetActionPressedThisFrame() && player.HasBall)
+        else
         {
-            machine.ChangeState(new PreppingShot(player, machine));
+            if (player.Rigidbody.linearVelocity == Vector2.zero)
+            {
+                if (player.InputProvider.GetActionPressedThisFrame() && player.Ball.Machine.CurrentState.CanAirInteract())
+                {
+                    machine.ChangeState(new HeaderState(player, machine, player.BallDetectionArea));
+                } 
+            }
+            if (player.InputProvider.GetActionPressedThisFrame() && player.Rigidbody.linearVelocity.sqrMagnitude > 0)
+            {
+                machine.ChangeState(new TacklingState(player, machine));
+            } 
         }
-        if (player.InputProvider.GetPassPressedThisFrame() && player.HasBall)
-        {
-            Debug.Log("Pass");
-            machine.ChangeState(new PassingState(player, machine));
-        }
+
+
+
+
+       
     }
 
     private void MovePlayer()

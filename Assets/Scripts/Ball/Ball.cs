@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    public event Action<Player> OnPossesionChanged;
+    
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -28,6 +30,7 @@ public class Ball : MonoBehaviour
     public Transform PlayerTransform => playerTransform;
     public SpriteRenderer SpriteRenderer => spriteRenderer;
     public GameObject Trail => trail;
+    public BallStateMachine Machine => machine;
     
     public bool IsInAir => spriteRenderer.transform.localPosition.y > 0.01f;
     
@@ -67,7 +70,7 @@ public class Ball : MonoBehaviour
         rb.linearVelocity = direction * power;
         if (distance > 10f)
         {
-            LaunchIntoAir(settings.shotHeight);
+            LaunchIntoAir(settings.gravity * distance / (1.5f * settings.passHeight));
             
         }
         machine.ChangeState(new FreeformState(this, machine,playerDetectionArea, playerTransform));
@@ -116,6 +119,16 @@ public class Ball : MonoBehaviour
         height = 0.05f;
     }
 
+    public void StopBall()
+    {
+        Rigidbody.linearVelocity = Vector2.zero;
+        machine.ChangeState(new FreeformState(this, machine, playerDetectionArea, playerTransform));
+    }
+    
+    public void HandlePossessionChange(Player newCarrier)
+    {
+        OnPossesionChanged?.Invoke(newCarrier);
+    }
 
     
 }

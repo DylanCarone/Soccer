@@ -51,5 +51,10 @@ public abstract class BallState
         }
     }
 
+    public virtual bool CanAirInteract()
+    {
+        return false;
+    }
+
         
 }

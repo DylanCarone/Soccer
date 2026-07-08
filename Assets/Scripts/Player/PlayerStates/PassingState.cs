@@ -1,9 +1,11 @@
 
+using System;
 using UnityEngine;
 
 public class PassingState : PlayerState
 {
 
+    public static Action<Player> OnPlayerPass;
     private const float MAX_HOLD_TIME = 0.1f;
 
     private float holdStartTime;
@@ -45,12 +47,19 @@ public class PassingState : PlayerState
     void ExecutePass()
     {
         Player target = PassTargetFinder.FindClosestPlayer(player.transform.position, aimDirection, 10f, 20f, player);
-        
+        if (target != null)
+        {
+            OnPlayerPass.Invoke(target);
+        }
         Vector2 direction = target != null ? ((Vector2)target.transform.position - (Vector2)player.transform.position).normalized : aimDirection; 
         
-        Debug.Log(target);
         float distance = target != null ? Vector2.Distance(player.transform.position, target.transform.position) : 0;
-        player.Ball.Pass(direction, player.PassPower, distance);
+        var passPower = player.PassPower;
+        if (distance < 10f)
+        {
+            passPower *= player.ClosePassMultiplier;
+        }
+        player.Ball.Pass(direction, passPower, distance);
         player.SetBall(false);
         machine.ChangeState(new RunningState(player, machine));
 

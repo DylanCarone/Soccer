@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class TacklingState : PlayerState
 {
-    private const string TACKLE_ANIMATION = "tackle";
     private float tackleStart = 0;
     private float groundFriction = 5f;
     
@@ -13,7 +12,7 @@ public class TacklingState : PlayerState
     public override void Enter()
     {
         tackleStart = Time.time;
-        player.PlayAnimation(TACKLE_ANIMATION);
+        player.PlayAnimation(Animations.TACKLE_ANIMATION);
         //player.Stop();
     }
 

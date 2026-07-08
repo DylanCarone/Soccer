@@ -5,7 +5,7 @@ public class PreppingShot : PlayerState
 {
     
     const float DURATION_MAX_BONUS = 1f;
-    private const float EASE_REWARD_FACTOR = 0.2f;
+    private const float EASE_REWARD_FACTOR = 0.3f;
     private float timeStartShot;
     Vector2 shotDirection =  Vector2.zero;
     
@@ -28,7 +28,8 @@ public class PreppingShot : PlayerState
         player.FlipPlayer(currentInput);
         if (currentInput != Vector2.zero)
         {
-            shotDirection = currentInput.normalized; }
+            shotDirection = currentInput.normalized; 
+        }
         
         
         var durationPress = Time.time - timeStartShot;

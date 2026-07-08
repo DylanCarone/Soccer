@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-[RequireComponent(typeof(PlayerInput))]
+
 public class PlayerInputProvider : MonoBehaviour, IInputProvider
 {
     [Header("Multiplayer Testing")] 

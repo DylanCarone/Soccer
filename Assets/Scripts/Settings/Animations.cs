@@ -7,4 +7,5 @@ public static class Animations
     public const string KICK_ANIMATION = "kick";
     public const string TACKLE_ANIMATION = "tackle";
     public const string ROLLING_ANIMATION = "roll";
+    public const string HEADER_ANIMATION = "header";
 }
