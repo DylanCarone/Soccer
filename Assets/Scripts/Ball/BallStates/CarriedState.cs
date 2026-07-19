@@ -63,6 +63,8 @@ public class CarriedState : BallState
         var offset = ball.Settings.dribbleOffset;
         ball.transform.position = leftSide ? carrier.position + new Vector3(vx + -offset.x,offset.y,0) :
             carrier.position + new Vector3(vx + offset.x,offset.y,0);
+        /*ball.SpriteRenderer.transform.position = leftSide ? carrier.position + new Vector3(vx + -offset.x,offset.y,0) :
+            carrier.position + new Vector3(vx + offset.x,offset.y,0);*/
         ball.SpriteRenderer.flipX = leftSide;
     }
 

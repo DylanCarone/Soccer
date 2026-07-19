@@ -262,8 +262,8 @@ MonoBehaviour:
   closePassMultiplier: 0.9
   maxPassSearchRadius: 10
   maxPassLineDeviation: 1.5
-  jumpHeight: 0.07
-  gravity: 0.5
+  jumpHeight: 0.03
+  gravity: 0.1
 --- !u!50 &2677533418950247432
 Rigidbody2D:
   serializedVersion: 5
@@ -303,8 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28185343f6a44514eb2d0c69dd341f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
-  forceGamepadIndex: 2
-  forceKeyboard: 0
+  forceGamepadIndex: 1
+  forceKeyboard: 1
 --- !u!114 &8142238709504275684
 MonoBehaviour:
   m_ObjectHideFlags: 0

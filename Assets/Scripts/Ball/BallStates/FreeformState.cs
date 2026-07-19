@@ -21,6 +21,7 @@ public class FreeformState : BallState
         ball.Rigidbody.bodyType = RigidbodyType2D.Dynamic;
         enterTime = Time.time;
         ball.PlayAnimation(Animations.IDLE_ANIMATION);
+        //ball.SpriteRenderer.transform.localPosition = Vector3.zero;
     }
 
     public override void Tick()

@@ -37,6 +37,6 @@ public class DistanceFinder : MonoBehaviour
         Vector3 midpoint = Vector3.Lerp(player1Pos, player2Pos, 0.5f);
 
         // Handles.Label draws 3D text in the Scene View
-        Handles.Label(midpoint, $"{dist:F2}m", style);
+        //Handles.Label(midpoint, $"{dist:F2}m", style);
     }
 }
